@@ -9,7 +9,7 @@ public class NestedCalssesTest {
 
     }
 
-    public static void StaticMethod(){}
+    public static void staticMethod(){}
 
 
 
@@ -21,11 +21,13 @@ public class NestedCalssesTest {
             // из статического вложенного класса
             int j = staticVar;
 
-
+            //NestedCalssesTest.this.notStaticMethod(); из статического вложенного класса
+            // невозможно обраттиться  экземпляру внешнего класса (this)
         }
 
         static void  staticMethod(){
-
+            //NestedCalssesTest.this.notStaticMethod();из статического вложенного класса
+            // невозможно обраттиться  экземпляру внешнего класса (this)
         }
     }
 
@@ -34,9 +36,15 @@ public class NestedCalssesTest {
         //static int staticVar; - Нельзя... как ее вызвать??мы не можем
         // обратиться к статическому контексту нестатического класса
 
-        void notStaticMethod(){
+        void notStaticMethod(){ // из нестатического метода внутреннего нестатического класса
+            // можно обратиться к чему угодно(любым членам) из внешнего класса
             int i = NestedCalssesTest.this.notStaticVar;
             int j = NestedCalssesTest.staticVar;
+            NestedCalssesTest.this.notStaticMethod();
+            int k = NestedCalssesTest.this.notStaticVar;
+            int l = NestedCalssesTest.this.staticVar;
+            NestedCalssesTest.this.notStaticMethod();
+            NestedCalssesTest.this.staticMethod();
         }
 
        // static void staticMethod(){ - Нельзя... как его вызвать?? мы не можем
